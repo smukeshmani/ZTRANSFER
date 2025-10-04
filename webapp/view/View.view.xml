@@ -1,0 +1,83 @@
+<mvc:View
+    controllerName="Transfer_Delivery_app.ZTRANSFER.controller.View"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:u="sap.ui.unified"
+    displayBlock="true">
+
+    <Shell id="shell">
+        <App id="app">
+            <pages>
+                <Page id="page" title="{i18n>title}">
+                    <content>
+                        <VBox class="sapUiSmallMargin">
+                            <f:SimpleForm
+                                id="IdInspectDoc"
+                                editable="true"
+                                layout="ResponsiveGridLayout"
+                                title="Please Upload The Delivery Document"
+                                labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="12"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="1"
+                                columnsL="1"
+                                columnsM="1"
+                                backgroundDesign="Solid"
+                                singleContainerFullSize="false"
+                                visible="{localModel>/VehicleDetVisible}">
+
+                                <f:content>
+                                    <Label text="Upload Transfer Delivery Document"/>
+                                    <u:FileUploader
+                                        id="fileUploader"
+                                        name="uploadExcel"
+                                        width="600px"
+                                        fileType="xls,xlsx"
+                                        change="onUploadChange"
+                                        tooltip="Upload Delivery Document"/>
+                                </f:content>
+                            </f:SimpleForm>
+
+                            <!-- Preview Table for Excel Data -->
+                            <Table id="excelTable" items="{excelData>/}">
+                                <columns>
+                                    <Column>
+                                        <Text text="DeliveryNo"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="Item"/>
+                                    </Column>
+                                    <Column>
+                                        <Text text="Quantity"/>
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                        <cells>
+                                            <Text text="{excelData>DeliveryNo}"/>
+                                            <Text text="{excelData>Item}"/>
+                                            <Text text="{excelData>Quantity}"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                            <Button 
+        text="Show JSON Payload" 
+        press="onShowJson" 
+        type="Emphasized" 
+        class="sapUiSmallMarginTop"/>
+
+                        </VBox>
+                    </content>
+                </Page>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>
